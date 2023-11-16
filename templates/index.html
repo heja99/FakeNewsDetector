@@ -94,19 +94,29 @@
 
         h1 {
             color: #532D8E;
-            font-size: 36px;
+            font-size: 40px;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
 
         .hello-icon {
-            margin-right: 10px;
+            margin-left: 10px;
         }
 
         h2 {
             color: #532D8E;
             margin-top: 10px;
+        }
+
+        .result-icon {
+            font-size: 24px;
+            margin-left: 5px;
+        }
+
+        .result-icon::before {
+            content: '\200B';
+            /* Add a zero-width space to ensure proper rendering */
         }
     </style>
 </head>
@@ -115,12 +125,11 @@
     <header>
         <img src="../static/FLPoly_Logo.png" alt="Logo">
         <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#">CAP 5771, Prof. Hajibabaee</a>
+            <a href="#">Made by <b>Alex & Jan</b></a>
         </nav>
     </header>
-    <h1><span class="hello-icon">📰</span>Fake News Detector</h1>
+    <h1>Fake News Detector<span class="hello-icon">📰</span></h1>
     <main>
         <form method="post" action="/analyze">
             <textarea name="text" placeholder="Enter text to analyze...">{{ input_text }}</textarea>
@@ -128,9 +137,16 @@
             <button type="submit">Analyze</button>
         </form>
         {% if result %}
-        <h2>Result: {{ result }}</h2>
+        <h2>Result: {{ result }}
+            {% if result == "Fake" %}
+            <span class="result-icon">❌</span>
+            {% else %}
+            <span class="result-icon">✅</span>
+            {% endif %}
+        </h2>
         {% endif %}
     </main>
 </body>
+
 
 </html>
